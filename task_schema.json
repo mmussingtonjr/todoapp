@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ToDo Task",
+  "type": "object",
+  "properties": {
+    "Completed": {
+      "type": "boolean",
+      "description": "Whether the task is completed"
+    },
+    "Created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the task was created"
+    },
+    "Details": {
+      "type": "string",
+      "description": "Additional details about the task"
+    },
+    "Title": {
+      "type": "string",
+      "description": "Title of the task"
+    },
+    "User": {
+      "type": "string",
+      "pattern": "^/users/[A-Za-z0-9]+$",
+      "description": "Reference to the user document"
+    }
+  },
+  "required": ["Completed", "Created", "Title", "User"],
+  "additionalProperties": false
+}

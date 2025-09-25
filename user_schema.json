@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "User",
+  "description": "Schema for user documents in Firestore (one document type only). Timestamps accept either RFC3339 strings or Firestore timestamp objects.",
+  "type": "object",
+  "properties": {
+    "birthday": {
+      "description": "The user's birthday. Accepts an RFC3339 date-time string or a Firestore timestamp object {seconds,nanos}.",
+      "oneOf": [
+        { "type": "string", "format": "date-time" },
+        {
+          "type": "object",
+          "properties": {
+            "seconds": { "type": "integer" },
+            "nanos": { "type": "integer", "minimum": 0, "maximum": 999999999 }
+          },
+          "required": ["seconds", "nanos"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "created_time": {
+      "description": "The time when the user was created. Accepts an RFC3339 date-time string or a Firestore timestamp object {seconds,nanos}.",
+      "oneOf": [
+        { "type": "string", "format": "date-time" },
+        {
+          "type": "object",
+          "properties": {
+            "seconds": { "type": "integer" },
+            "nanos": { "type": "integer", "minimum": 0, "maximum": 999999999 }
+          },
+          "required": ["seconds", "nanos"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "display_name": {
+      "description": "The display name of the user",
+      "type": "string",
+      "minLength": 1
+    },
+    "email": {
+      "description": "The email address of the user",
+      "type": "string",
+      "format": "email"
+    },
+    "photo_url": {
+      "description": "The URL of the user's profile photo",
+      "type": "string",
+      "format": "uri"
+    },
+    "uid": {
+      "description": "The unique identifier of the user (Auth UID / document id)",
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": ["created_time", "display_name", "email", "uid"],
+  "additionalProperties": false
+}
